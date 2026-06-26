@@ -36,16 +36,16 @@ An autonomous **Post-Discharge Patient Care Agent** that acts as a virtual follo
 ```
 Patient App (React/Flutter)
         ↓
-IBM watsonx Orchestrate (PostDischargePatient_CareAgent)
+IBM Watsonx Orchestrate (PostDischargePatient_CareAgent)
         ↓                    ↓
 watsonx.ai               Tools (OpenAPI)
-(Risk Evaluation)    ┌───────────────────┐
+(Risk Evaluation)    ┌────────────────────┐
         ↓            │ post__symptoms     │
 Escalation Flag      │ get__medications   │
         ↓            │ post__escalate     │
 Nurse Dashboard      │ post__appointments │
         ↓            │ get__procedures    │
-    MLflow           └───────────────────┘
+    MLflow           └────────────────────┘
 (KPI Logging)
         ↓
 PostgreSQL / IBM Cloud DB2
@@ -90,7 +90,7 @@ PostgreSQL / IBM Cloud DB2
 
 ## 🧠 Knowledge Base (18 Documents)
 
-The agent references verified clinical documents uploaded to watsonx Orchestrate:
+The agent references verified clinical documents uploaded to WatsonX Orchestrate:
 
 - `PostDischarge_Guidelines.pdf` — discharge protocols, symptom escalation criteria
 - `HF-Symptom-Tracker.pdf` — heart failure symptom monitoring
