@@ -1,0 +1,318 @@
+openapi: 3.0.0
+info:
+  title: Post-Discharge Patient Care Agent Tools
+  description: |
+    OpenAPI specification for all tools used by PostDischargePatient_CareAgent
+    in IBM watsonx Orchestrate. Import this file to configure agent toolset.
+  version: "1.0.0"
+  contact:
+    name: Sviatoslav Pechenevskyi
+    email: svyatoslavpech@gmail.com
+
+servers:
+  - url: http://localhost:5000
+    description: Local development
+  - url: https://api.postdischarge.health
+    description: Production (placeholder)
+
+paths:
+
+  /checkins:
+    post:
+      operationId: post__symptoms
+      summary: Submit patient symptoms
+      description: |
+        Collects structured symptom data from daily check-in.
+        Evaluates risk level and triggers escalation if needed.
+        Layer 1 of 4-layer safety architecture.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [symptom_type, severity]
+              properties:
+                symptom_type:
+                  type: string
+                  enum: [fever, pain, swelling, mobility, fatigue, other]
+                  description: Type of primary symptom reported
+                severity:
+                  type: number
+                  minimum: 0
+                  maximum: 10
+                  description: Symptom severity on scale 0-10
+                temperature_f:
+                  type: number
+                  description: Body temperature in Fahrenheit
+                notes:
+                  type: string
+                  description: Free-text patient notes about symptoms
+      responses:
+        "201":
+          description: Check-in submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckinResponse"
+
+  /medications:
+    get:
+      operationId: get__medications
+      summary: Get list of patient medications
+      description: Retrieves the patient's current medication schedule
+      responses:
+        "200":
+          description: Medication list retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  medications:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Medication"
+
+  /medications/remind:
+    post:
+      operationId: post__medications_remind
+      summary: Send medication reminder
+      description: Triggers a personalized medication reminder via configured channel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [medication_id]
+              properties:
+                medication_id:
+                  type: integer
+                channel:
+                  type: string
+                  enum: [app, sms, email]
+                  default: app
+      responses:
+        "200":
+          description: Reminder sent successfully
+
+  /alerts:
+    post:
+      operationId: post__escalate
+      summary: Escalate a patient case
+      description: |
+        Triggers immediate nurse notification for high-risk symptoms.
+        Layer 3 of 4-layer safety architecture.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [risk_level, reason]
+              properties:
+                risk_level:
+                  type: string
+                  enum: [medium, high, critical]
+                reason:
+                  type: string
+                  description: Clinical reason for escalation
+                symptom_report_id:
+                  type: integer
+      responses:
+        "201":
+          description: Escalation logged and nurse notified
+
+  /appointments:
+    post:
+      operationId: post__appointments
+      summary: Schedule a new appointment
+      description: Books a follow-up appointment with healthcare provider
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentRequest"
+      responses:
+        "201":
+          description: Appointment scheduled
+
+    get:
+      operationId: get__appointments
+      summary: List upcoming appointments
+      responses:
+        "200":
+          description: Appointments retrieved
+
+  /appointments/{appointment_id}:
+    patch:
+      operationId: patch__appointments
+      summary: Edit appointment
+      description: Partially update an existing appointment date/time or reason
+      parameters:
+        - name: appointment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentRequest"
+      responses:
+        "200":
+          description: Appointment updated
+
+    delete:
+      operationId: delete__appointments
+      summary: Cancel appointment
+      parameters:
+        - name: appointment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Appointment cancelled
+
+  /procedures/historical:
+    get:
+      operationId: get__historical_procedures
+      summary: Historical procedures
+      description: |
+        Enables intelligent analysis and summarization of the patient's
+        historical medical procedures.
+      responses:
+        "200":
+          description: Historical procedure list
+
+  /procedures/available:
+    get:
+      operationId: get__available_procedures
+      summary: Available procedures
+      description: |
+        Enables intelligent analysis and summarization of available
+        procedures and estimated costs.
+      responses:
+        "200":
+          description: Available procedures list
+
+  /procedures/cost:
+    get:
+      operationId: get__procedures_cost
+      summary: Get estimated cost for a procedure
+      parameters:
+        - name: procedure_name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Procedure cost estimate
+
+  /patients/me:
+    get:
+      operationId: get__member_profile
+      summary: Get member profile
+      description: |
+        Retrieves the patient's profile including plan details,
+        contact information, and recovery preferences.
+      responses:
+        "200":
+          description: Patient profile retrieved
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientProfile"
+
+  /dashboard/patient:
+    get:
+      operationId: get__dashboard_patient
+      summary: Patient recovery dashboard
+      description: Returns aggregated KPIs for patient view
+      responses:
+        "200":
+          description: Dashboard metrics
+
+components:
+  schemas:
+
+    CheckinResponse:
+      type: object
+      properties:
+        checkin_id:
+          type: integer
+        risk_level:
+          type: string
+          enum: [low, medium, high, critical]
+        escalation:
+          type: boolean
+        message:
+          type: string
+          description: Empathetic feedback message for patient
+        next_checkin:
+          type: string
+
+    Medication:
+      type: object
+      properties:
+        id:
+          type: integer
+        medication_name:
+          type: string
+        dose:
+          type: string
+        scheduled_time:
+          type: string
+          format: date-time
+        adherence_status:
+          type: string
+          enum: [taken, missed, pending]
+
+    AppointmentRequest:
+      type: object
+      properties:
+        appointment_date:
+          type: string
+          format: date-time
+        reason:
+          type: string
+        provider_name:
+          type: string
+        appointment_type:
+          type: string
+          enum: [follow-up, urgent, routine]
+
+    PatientProfile:
+      type: object
+      properties:
+        patient_id:
+          type: string
+        name:
+          type: string
+        age:
+          type: integer
+        discharge_date:
+          type: string
+          format: date
+        diagnosis:
+          type: string
+        checkin_time:
+          type: string
+        reminder_method:
+          type: string
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
