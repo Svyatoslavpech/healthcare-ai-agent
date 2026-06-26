@@ -1,0 +1,40 @@
+# Environment
+.env
+.env.local
+.env.production
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Node
+node_modules/
+frontend/build/
+frontend/.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Docker
+*.log
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Secrets
+*.pem
+*.key
+api_keys.txt
