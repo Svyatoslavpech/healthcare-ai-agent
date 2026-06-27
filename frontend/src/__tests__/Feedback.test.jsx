@@ -1,6 +1,7 @@
-// PATH: frontend/src/components/Feedback.test.jsx
+// PATH: frontend/src/__tests__/Feedback.test.jsx
+import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Feedback from './Feedback';
+import Feedback from '../components/Feedback';
 
 const mockResult = {
   risk_level: 'low',

@@ -1,19 +1,23 @@
-// PATH: frontend/src/__tests__/Settings.test.jsx
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import Settings from '../components/Settings';
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
+const mockPreferences = {
+  checkin_time: '09:00',
+  reminder_method: 'app',
+  notifications_on: true,
+};
+
+beforeEach(() => {
+  jest.spyOn(global, 'fetch').mockResolvedValue({
     ok: true,
-    json: () =>
-      Promise.resolve({
-        checkin_time: '09:00',
-        reminder_method: 'app',
-        notifications_on: true,
-      }),
-  })
-);
+    json: async () => mockPreferences,
+  });
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 test('renders settings page', () => {
   render(<Settings token="mock-token" />);
