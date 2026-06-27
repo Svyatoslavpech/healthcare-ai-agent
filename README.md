@@ -8,6 +8,7 @@
 [![IBM watsonx](https://img.shields.io/badge/IBM-watsonx-0062FF)](https://www.ibm.com/watsonx)
 [![Model](https://img.shields.io/badge/Model-Granite--3.3--8B--Instruct-green)](https://www.ibm.com/granite)
 [![HIPAA](https://img.shields.io/badge/Compliance-HIPAA--Ready-red)](docs/architecture.md)
+[![Status](https://img.shields.io/badge/Status-Backend%20Ready%20%7C%20Frontend%20In%20Progress-yellow)](https://github.com/Svyatoslavpech/healthcare-ai-agent)
 [![Portfolio](https://img.shields.io/badge/Portfolio-svyatsolutions.com-1F3864)](https://svyatsolutions.com)
 
 ---
@@ -28,6 +29,34 @@ An autonomous **Post-Discharge Patient Care Agent** that acts as a virtual follo
 - 📊 **Recovery dashboard** — visual tracking of adherence and recovery trends
 - 🧠 **Multi-turn memory** — context-aware interactions across sessions
 - 💙 **Empathetic messaging** — warm, clinical, HIPAA-compliant responses
+
+---
+
+## 🧭 Project Journey
+
+This project began as a prototype developed during the **IBM AI Experiential Learning Lab** (Healthcare Track, Challenge 1). During the Lab, our team:
+
+- Conducted user research and validated the concept with patients and nurses
+- Designed the agent architecture and conversation flow
+- Built a functional prototype using IBM WatsonX Orchestrate
+- Ran 55+ test scenarios, achieving ≥90% accuracy in critical symptom detection
+- Received confirmation from IBM mentors that the approach was clinically sound
+
+**After the Lab**, we took the initiative to scale the prototype into a production-ready system:
+
+- ✅ Built a full Flask backend with 4-layer safety architecture
+- ✅ Implemented JWT authentication, database models, and REST API
+- ✅ Added MLflow audit logging for HIPAA compliance
+- ✅ Wrote comprehensive tests (55+ unit + adversarial + integration scenarios)
+- ✅ Set up Docker, docker-compose, and GitHub Actions CI/CD
+- ✅ Integrated with IBM watsonx.ai Granite-3.3-8B for risk evaluation
+
+**Next steps (in progress):**
+
+- 🔨 Developing React frontend (Login, Dashboard, Settings, Feedback)
+- 📱 Flutter mobile app (basic screens for patient interaction)
+- 📊 Monitoring (Prometheus + Grafana)
+- 🚀 Deployment automation to IBM Cloud
 
 ---
 
@@ -59,12 +88,12 @@ PostgreSQL / IBM Cloud DB2
 
 ## 🔬 4-Layer Safety Architecture
 
-| Layer | Component | Implementation |
-|-------|-----------|----------------|
-| **Layer 1** | Input Validation | Classify patient intent, flag emergencies BEFORE LLM processes query |
-| **Layer 2** | RAG Constraints | Verified clinical sources only (PostDischarge_Guidelines.pdf, HF-Symptom-Tracker.pdf) |
-| **Layer 3** | Output Guardrails | Block unverified medical references, enforce HIPAA boundaries |
-| **Layer 4** | Audit Logging | MLflow records every decision for compliance review |
+| Layer       | Component         | Implementation                                                                        |
+|-------------|-------------------|---------------------------------------------------------------------------------------|
+| **Layer 1** | Input Validation  | Classify patient intent, flag emergencies BEFORE LLM processes query                  |
+| **Layer 2** | RAG Constraints   | Verified clinical sources only (PostDischarge_Guidelines.pdf, HF-Symptom-Tracker.pdf) |
+| **Layer 3** | Output Guardrails | Block unverified medical references, enforce HIPAA boundaries                         |
+| **Layer 4** | Audit Logging     | MLflow records every decision for compliance review                                   |
 
 **Result: Zero critical findings across 55+ test scenarios including adversarial prompts.**
 
@@ -72,19 +101,19 @@ PostgreSQL / IBM Cloud DB2
 
 ## 🤖 Agent Tools (OpenAPI)
 
-| Tool | Operation | Description |
-|------|-----------|-------------|
-| Submit patient symptoms | `post__symptoms` | Structured symptom input and severity scoring |
-| Get patient medications | `get__medications` | Retrieve patient medication schedule |
-| Send medication reminder | `post__medications_remind` | Trigger personalized reminder |
-| Escalate patient case | `post__escalate` | Nurse notification for high-risk cases |
-| Schedule appointment | `post__appointments` | Book follow-up visits |
-| Get estimated procedure cost | `get__procedures_cost` | Insurance/cost queries |
-| Historical procedures | `get__historical_procedures` | Past procedure analysis |
-| Available procedures | `get__available_procedures` | Current procedure options |
-| Get member profile | `get__member_profile` | Patient plan and contact data |
-| Edit appointment | `patch__appointments` | Reschedule existing appointments |
-| Cancel appointment | `delete__appointments` | Cancel appointments |
+| Tool                         | Operation                    | Description                                   |
+|------------------------------|------------------------------|-----------------------------------------------|
+| Submit patient symptoms      | `post__symptoms`             | Structured symptom input and severity scoring |
+| Get patient medications      | `get__medications`           | Retrieve patient medication schedule          |
+| Send medication reminder     | `post__medications_remind`   | Trigger personalized reminder                 |
+| Escalate patient case        | `post__escalate`             | Nurse notification for high-risk cases        |
+| Schedule appointment         | `post__appointments`         | Book follow-up visits                         |
+| Get estimated procedure cost | `get__procedures_cost`       | Insurance/cost queries                        |
+| Historical procedures        | `get__historical_procedures` | Past procedure analysis                       |
+| Available procedures         | `get__available_procedures`  | Current procedure options                     |
+| Get member profile           | `get__member_profile`        | Patient plan and contact data                 |
+| Edit appointment             | `patch__appointments`        | Reschedule existing appointments              |
+| Cancel appointment           | `delete__appointments`       | Cancel appointments                           |
 
 ---
 
@@ -105,27 +134,28 @@ The agent references verified clinical documents uploaded to WatsonX Orchestrate
 
 ## 📊 KPIs & Metrics
 
-| KPI | Target | Status |
-|-----|--------|--------|
-| Critical symptom detection accuracy | ≥ 90% | ✅ Validated |
-| Average agent response time | ≤ 3 seconds | ✅ Validated |
-| Conversation completion rate | ≥ 85% | ✅ Validated |
-| Ethical compliance (IBM mentor review) | Confirmed | ✅ Confirmed |
+| KPI                                    | Target      | Status       |
+|----------------------------------------|-------------|--------------|
+| Critical symptom detection accuracy    | ≥ 90%       | ✅ Validated |
+| Average agent response time            | ≤ 3 seconds | ✅ Validated |
+| Conversation completion rate           | ≥ 85%       | ✅ Validated |
+| Ethical compliance (IBM mentor review) | Confirmed   | ✅ Confirmed |
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack — Status
 
-| Layer | Technology |
-|-------|-----------|
-| **AI Core** | IBM watsonx Orchestrate + watsonx.ai |
-| **LLM** | IBM Granite-3.3-8B-Instruct |
-| **Backend** | Python (Flask) |
-| **Frontend** | React.js (Web) + Flutter (Mobile) |
-| **Database** | PostgreSQL / IBM Cloud DB2 |
-| **Analytics** | MLflow + Tableau / Power BI |
-| **Infrastructure** | Docker, Docker Compose, GitHub Actions |
-| **Compliance** | HIPAA-ready, Apache 2.0 License |
+| Layer              | Technology                             | Status              |
+|--------------------|----------------------------------------|---------------------|
+| **AI Core**        | IBM watsonx Orchestrate + watsonx.ai   | ✅ LIVE             |
+| **LLM**            | IBM Granite-3.3-8B-Instruct            | ✅ Integrated       |
+| **Backend**        | Python (Flask)                         | ✅ Production-ready |
+| **Frontend**       | React.js (Web)                         | 🚧 In development   |
+| **Mobile**         | Flutter                                | 🚧 Planned          |
+| **Database**       | PostgreSQL / IBM Cloud DB2             | ✅ Ready            |
+| **Analytics**      | MLflow + Tableau / Power BI            | ✅ Ready            |
+| **Infrastructure** | Docker, Docker Compose, GitHub Actions | ✅ Ready            |
+| **Compliance**     | HIPAA-ready, Apache 2.0 License        | ✅ Ready            |
 
 ---
 
@@ -155,7 +185,7 @@ docker-compose up --build
 **Services after startup:**
 - Backend API: `http://localhost:5000`
 - Frontend: `http://localhost:3000`
-- API Docs: `http://localhost:5000/api/docs`
+- MLflow: `http://localhost:5001`
 
 ### Manual Setup
 
@@ -163,7 +193,7 @@ docker-compose up --build
 # Backend
 cd src/backend
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate
 pip install -r requirements.txt
 flask run
 
@@ -175,96 +205,10 @@ npm start
 
 ---
 
-## 📁 Repository Structure
-
-```
-healthcare-ai-agent/
-├── README.md
-├── LICENSE
-├── requirements.txt
-├── docker-compose.yml
-├── Dockerfile
-├── .env.example
-├── .gitignore
-│
-├── agent-config/                    # IBM watsonx Orchestrate agent config
-│   ├── persistent_prompt.txt        # Production-ready system prompt
-│   ├── tools_openapi.yaml           # OpenAPI spec for all 11 tools
-│   ├── knowledge_sources.json       # Knowledge base metadata
-│   └── guidelines.md                # Agent behavior guidelines
-│
-├── src/
-│   └── backend/
-│       ├── app.py                   # Flask application entry point
-│       ├── config.py                # Configuration management
-│       ├── models/
-│       │   ├── patient.py           # Patient Profile model
-│       │   ├── symptom.py           # Symptom Report model
-│       │   ├── medication.py        # Medication Adherence Log
-│       │   ├── escalation.py        # Escalation Log model
-│       │   └── dashboard.py         # Dashboard Metrics model
-│       ├── routes/
-│       │   ├── auth.py              # JWT authentication
-│       │   ├── patients.py          # Patient CRUD endpoints
-│       │   ├── checkins.py          # Daily check-in endpoints
-│       │   ├── medications.py       # Medication management
-│       │   ├── alerts.py            # Escalation alerts
-│       │   └── dashboard.py         # KPI dashboard
-│       └── services/
-│           ├── watsonx_assistant.py # watsonx Orchestrate integration
-│           ├── watsonx_ai.py        # watsonx.ai risk evaluation
-│           ├── notification.py      # SMS/Email/Push notifications
-│           └── mlflow_logger.py     # MLflow KPI logging
-│
-├── frontend/
-│   ├── package.json
-│   └── src/
-│       ├── App.jsx
-│       └── components/
-│           ├── Login.jsx            # Patient login screen
-│           ├── Onboarding.jsx       # Preference setup
-│           ├── Checkin.jsx          # Daily symptom check-in
-│           ├── Feedback.jsx         # AI feedback cards
-│           ├── Dashboard.jsx        # Recovery trends
-│           └── Settings.jsx         # Notification preferences
-│
-├── tests/
-│   ├── unit/
-│   │   ├── test_checkins.py         # Symptom collection tests
-│   │   ├── test_escalation.py       # Escalation logic tests
-│   │   └── test_models.py           # Data model tests
-│   └── integration/
-│       ├── test_adversarial.py      # Adversarial prompt testing
-│       └── test_api_endpoints.py    # Full API integration tests
-│
-├── docs/
-│   ├── architecture.md              # System architecture
-│   ├── api_spec.yaml                # OpenAPI 3.0 specification
-│   ├── user_guide.md                # Patient & nurse guide
-│   └── deployment_guide.md          # IBM Cloud deployment
-│
-└── .github/
-    └── workflows/
-        └── ci.yml                   # GitHub Actions CI/CD
-```
-
----
-
 ## 🧪 Test Scenarios
 
-### Single-Step
-```
-"Remind me when to take my antibiotics"
-→ get__medications → post__medications_remind
-
-"How should I monitor my swelling today?"
-→ Symptoms_Check + PostDischarge_Guidelines.pdf
-
-"I feel dizzy and feverish"
-→ post__symptoms → post__escalate
-```
-
 ### Multi-Step (from live demo)
+
 ```
 Patient: "I had viral fever and now I'm recovering from it"
 Agent:   "What symptoms are you still experiencing?"
@@ -278,27 +222,24 @@ Patient: "65"
 → Risk evaluation → Escalation triggered → Recovery guidance provided
 ```
 
----
-
-## 🏆 Running Tests
+### Running Tests
 
 ```bash
-cd src/backend
-pytest tests/unit -v
-pytest tests/integration -v --coverage
+PYTHONPATH=src/backend pytest tests/unit -v
+PYTHONPATH=src/backend pytest tests/integration -v
 ```
 
 ---
 
 ## 👥 Team — Spiritual Techies
 
-| Role | Name |
-|------|------|
-| Project Lead / Scrum Master | **Sviatoslav Pechenevskyi** |
-| AI / Backend Developer | Sylvester Edmond Saidu |
-| Frontend / Chatbot Developer | Huu Hung Nguyen |
-| Data & QA Engineer | Dipayan Samanta |
-| Documentation Lead | Sviatoslav Pechenevskyi |
+| Role                         | Name                        |
+|------------------------------|-----------------------------|
+| Project Lead / Scrum Master  | **Sviatoslav Pechenevskyi** |
+| AI / Backend Developer       | Sylvester Edmond Saidu      |
+| Frontend / Chatbot Developer | Huu Hung Nguyen             |
+| Data & QA Engineer           | Dipayan Samanta             |
+| Documentation Lead           | Sviatoslav Pechenevskyi     |
 
 **Contact:** svyatoslavpech@gmail.com  
 **LinkedIn:** [linkedin.com/in/svyatsolution](https://linkedin.com/in/svyatsolution)  
