@@ -3,5 +3,6 @@ import App from './App';
 
 test('renders patient care agent heading', () => {
   render(<App />);
-  expect(screen.getByText('Post-Discharge Patient Care Agent')).toBeTruthy();
+  const heading = screen.getByText('Post-Discharge Patient Care Agent');
+  expect(heading).toBeTruthy();
 });
