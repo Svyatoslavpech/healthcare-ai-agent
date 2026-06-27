@@ -1,0 +1,73 @@
+// Database ER Diagram — Post-Discharge Patient Care Agent
+// View at: https://dbdiagram.io (paste this file)
+// Team: Spiritual Techies | IBM AI Experiential Learning Lab 2025
+
+Table patient_profiles {
+  patient_id         varchar(36)  [pk]
+  name               varchar(100) [not null]
+  age                int          [not null]
+  contact_phone      varchar(20)
+  contact_email      varchar(120) [unique, not null]
+  password_hash      varchar(256) [not null]
+  discharge_date     date         [not null]
+  diagnosis          varchar(200)
+  tech_skill_level   varchar(20)  [default: 'medium']
+  checkin_time       varchar(10)  [default: '09:00']
+  reminder_method    varchar(20)  [default: 'app']
+  notification_on    boolean      [default: true]
+  created_at         timestamp    [default: `now()`]
+}
+
+Table symptom_reports {
+  id               int          [pk, increment]
+  patient_id       varchar(36)  [ref: > patient_profiles.patient_id, not null]
+  report_date      date         [default: `now()`]
+  report_time      timestamp    [default: `now()`]
+  symptom_type     varchar(50)
+  severity         float
+  temperature_f    float
+  notes            text
+  escalation_flag  boolean      [default: false]
+  risk_level       varchar(10)  [default: 'low']
+}
+
+Table medication_adherence_logs {
+  id               int          [pk, increment]
+  patient_id       varchar(36)  [ref: > patient_profiles.patient_id, not null]
+  medication_name  varchar(100) [not null]
+  dose             varchar(50)
+  scheduled_time   timestamp    [not null]
+  actual_time      timestamp
+  adherence_status varchar(20)  [default: 'pending']
+  reminder_sent    boolean      [default: false]
+  reminder_sent_at timestamp
+}
+
+Table escalation_logs {
+  id                 int         [pk, increment]
+  patient_id         varchar(36) [ref: > patient_profiles.patient_id, not null]
+  triggered_at       timestamp   [default: `now()`]
+  symptom_report_id  int         [ref: > symptom_reports.id]
+  risk_level         varchar(10) [not null]
+  trigger_reason     text
+  nurse_contacted    boolean     [default: false]
+  nurse_contacted_at timestamp
+  resolved           boolean     [default: false]
+  resolution_notes   text
+}
+
+Table dashboard_metrics {
+  id                   int         [pk, increment]
+  patient_id           varchar(36) [ref: > patient_profiles.patient_id, unique, not null]
+  pain_trend           json
+  adherence_percentage float       [default: 0.0]
+  checkins_completed   int         [default: 0]
+  milestones_completed int         [default: 0]
+  high_risk_flags      int         [default: 0]
+  last_updated         timestamp   [default: `now()`]
+}
+
+// Indexes
+Index idx_patient_symptoms  on symptom_reports(patient_id, report_date)
+Index idx_medication_patient on medication_adherence_logs(patient_id, scheduled_time)
+Index idx_escalation_patient on escalation_logs(patient_id, triggered_at)
