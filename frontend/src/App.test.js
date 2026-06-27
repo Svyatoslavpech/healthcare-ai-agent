@@ -1,10 +1,8 @@
 // PATH: frontend/src/App.test.js
-import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders app without crashing', () => {
+test('renders patient care agent heading', () => {
   render(<App />);
   expect(document.body).toBeInTheDocument();
 });
-

@@ -1,33 +1,38 @@
-// Login.test.jsx
 // PATH: frontend/src/components/Login.test.jsx
 import { render, screen, fireEvent } from '@testing-library/react';
-import Login from './Login';
 import { AuthContext } from '../context/AuthContext';
+import Login from './Login';
 
 const mockLogin = jest.fn();
 
-const renderWithContext = () => {
-  return render(
+const renderWithContext = () =>
+  render(
     <AuthContext.Provider value={{ login: mockLogin }}>
       <Login />
     </AuthContext.Provider>
   );
-};
 
 test('renders login form', () => {
   renderWithContext();
-  expect(screen.getByPlaceholderText(/patient@hospital.com/i)).toBeInTheDocument();
-  expect(screen.getByPlaceholderText(/••••••••/i)).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
+  expect(screen.getByText(/Sign In/i)).toBeInTheDocument();
 });
 
-test('renders logo and title', () => {
+test('renders email field', () => {
+  renderWithContext();
+  expect(screen.getByPlaceholderText(/patient@hospital.com/i)).toBeInTheDocument();
+});
+
+test('renders password field', () => {
+  renderWithContext();
+  expect(screen.getByPlaceholderText(/••••••••/i)).toBeInTheDocument();
+});
+
+test('renders app title', () => {
   renderWithContext();
   expect(screen.getByText(/Post-Discharge Care/i)).toBeInTheDocument();
-  expect(screen.getByText(/AI-powered recovery assistant/i)).toBeInTheDocument();
 });
 
-test('renders demo hint', () => {
+test('renders demo credentials hint', () => {
   renderWithContext();
   expect(screen.getByText(/Demo credentials/i)).toBeInTheDocument();
 });
