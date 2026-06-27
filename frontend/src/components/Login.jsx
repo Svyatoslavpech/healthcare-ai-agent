@@ -1,33 +1,35 @@
 /**
  * Login Component — Patient Authentication
- * JWT-based login with IBM Blue design system
+ * JWT-based login with refresh token support
+ * IBM Blue #0062FF Design System
+ * PATH: frontend/src/components/Login.jsx
  */
-
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 export default function Login() {
-  const { login }                   = useContext(AuthContext);
-  const [email,    setEmail]        = useState("");
-  const [password, setPassword]     = useState("");
-  const [loading,  setLoading]      = useState(false);
-  const [error,    setError]        = useState("");
+  const { login } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
-
     try {
-      const res  = await fetch(`${API_URL}/auth/login`, {
-        method:  "POST",
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Login failed. Please try again.");
+      if (!res.ok) {
+        throw new Error(data.message || "Login failed. Please try again.");
+      }
       login(data.access_token, data.refresh_token, data.user);
       window.location.href = "/checkin";
     } catch (err) {
@@ -45,7 +47,6 @@ export default function Login() {
           <h1 style={styles.title}>Post-Discharge Care</h1>
           <p style={styles.subtitle}>Your AI-powered recovery assistant</p>
         </div>
-
         <form onSubmit={handleSubmit} style={styles.form}>
           <div style={styles.inputGroup}>
             <label style={styles.label}>Email</label>
@@ -58,7 +59,6 @@ export default function Login() {
               required
             />
           </div>
-
           <div style={styles.inputGroup}>
             <label style={styles.label}>Password</label>
             <input
@@ -70,9 +70,7 @@ export default function Login() {
               required
             />
           </div>
-
           {error && <p style={styles.error}>{error}</p>}
-
           <button
             type="submit"
             style={{ ...styles.primaryBtn, opacity: loading ? 0.7 : 1 }}
@@ -81,25 +79,59 @@ export default function Login() {
             {loading ? "Logging in..." : "Sign In"}
           </button>
         </form>
-
-        <p style={styles.demoHint}>Demo: patient@demo.com / password123</p>
+        <p style={styles.demoHint}>
+          Demo credentials: patient@demo.com / password123
+        </p>
       </div>
     </div>
   );
 }
 
 const styles = {
-  container:   { minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#F4F8FF", fontFamily: "'IBM Plex Sans', Arial, sans-serif" },
-  card:        { width: 400, maxWidth: "90%", padding: 40, borderRadius: 16, background: "#fff", boxShadow: "0 8px 40px rgba(0,98,255,0.12)", textAlign: "center" },
+  container: {
+    minHeight: "100vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "#F4F8FF",
+    fontFamily: "'IBM Plex Sans', Arial, sans-serif",
+  },
+  card: {
+    width: 400,
+    maxWidth: "90%",
+    padding: 40,
+    borderRadius: 16,
+    background: "#fff",
+    boxShadow: "0 8px 40px rgba(0,98,255,0.12)",
+    textAlign: "center",
+  },
   logoSection: { marginBottom: 32 },
-  logo:        { fontSize: 48, display: "block" },
-  title:       { fontSize: 24, fontWeight: 700, color: "#0062FF", margin: "8px 0 4px" },
-  subtitle:    { fontSize: 14, color: "#595959" },
-  form:        { textAlign: "left" },
-  inputGroup:  { marginBottom: 16 },
-  label:       { display: "block", fontSize: 14, fontWeight: 600, color: "#222", marginBottom: 4 },
-  input:       { width: "100%", padding: "12px 14px", border: "1.5px solid #ddd", borderRadius: 8, fontSize: 16, boxSizing: "border-box" },
-  primaryBtn:  { width: "100%", padding: "14px 0", background: "#0062FF", color: "#fff", border: "none", borderRadius: 10, fontSize: 16, fontWeight: 700, cursor: "pointer", marginTop: 8 },
-  error:       { color: "#CC0000", fontSize: 14, textAlign: "center", marginTop: 8 },
-  demoHint:    { fontSize: 12, color: "#999", marginTop: 16, fontStyle: "italic" },
+  logo: { fontSize: 48, display: "block" },
+  title: { fontSize: 24, fontWeight: 700, color: "#0062FF", margin: "8px 0 4px" },
+  subtitle: { fontSize: 14, color: "#595959" },
+  form: { textAlign: "left" },
+  inputGroup: { marginBottom: 16 },
+  label: { display: "block", fontSize: 14, fontWeight: 600, color: "#222", marginBottom: 4 },
+  input: {
+    width: "100%",
+    padding: "12px 14px",
+    border: "1.5px solid #ddd",
+    borderRadius: 8,
+    fontSize: 16,
+    boxSizing: "border-box",
+  },
+  primaryBtn: {
+    width: "100%",
+    padding: "14px 0",
+    background: "#0062FF",
+    color: "#fff",
+    border: "none",
+    borderRadius: 10,
+    fontSize: 16,
+    fontWeight: 700,
+    cursor: "pointer",
+    marginTop: 8,
+  },
+  error: { color: "#CC0000", fontSize: 14, textAlign: "center", marginTop: 8 },
+  demoHint: { fontSize: 12, color: "#999", marginTop: 16, fontStyle: "italic" },
 };
