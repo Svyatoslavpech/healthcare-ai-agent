@@ -123,3 +123,6 @@ jobs:
       - name: Verify image contents (routes)
         run: |
           docker run --rm postdischarge-backend:test ls -la /app/routes/
+      - name: Verify image contents (services)
+        run: |
+          docker run --rm postdischarge-backend:test ls -la /app/services/

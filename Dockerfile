@@ -17,6 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/backend/ .
 # Явное копирование папки routes (на всякий случай)
 COPY src/backend/routes /app/routes
+COPY src/backend/services /app/services
 
 # Non-root user for security
 RUN adduser --disabled-password --gecos "" appuser
