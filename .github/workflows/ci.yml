@@ -107,8 +107,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build backend image
-        run: docker build -t postdischarge-backend:test .
+      - name: Build backend image (no cache)
+        run: docker build --no-cache -t postdischarge-backend:test .
 
       - name: Verify image runs
         run: |
