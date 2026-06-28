@@ -117,3 +117,9 @@ jobs:
             -e WATSONX_API_KEY="test" \
             postdischarge-backend:test \
             python -c "from app import create_app; app = create_app(); print('OK')"
+      - name: Verify image contents
+        run: |
+          docker run --rm postdischarge-backend:test ls -la /app/routes/
+      - name: Verify image contents (routes)
+        run: |
+          docker run --rm postdischarge-backend:test ls -la /app/routes/
