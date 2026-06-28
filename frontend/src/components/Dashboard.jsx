@@ -1,12 +1,12 @@
 /**
  * Dashboard Component — Recovery Trends Visualization
- * Displays pain trend, adherence percentage, and milestones
- * Uses Recharts for interactive charts
- * PATH: frontend/src/components/Dashboard.jsx
+ * Pain trend + adherence charts using Recharts
+ * Updated: removed BarChart (no 'adherence' field in data)
  */
+
 import { useState, useEffect } from "react";
 import {
-  LineChart, Line, BarChart, Bar,
+  LineChart, Line,
   XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
 } from "recharts";
 
@@ -15,24 +15,27 @@ const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 export default function Dashboard({ token }) {
   const [metrics, setMetrics] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchDashboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const fetchDashboard = async () => {
     try {
+      setRefreshing(true);
       const res = await fetch(`${API_URL}/dashboard/patient`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to load dashboard");
-      const data = await res.json();
-      setMetrics(data);
+      setMetrics(await res.json());
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   };
 
@@ -41,29 +44,23 @@ export default function Dashboard({ token }) {
   if (!metrics) return <div style={styles.error}>No data available</div>;
 
   const painTrend = metrics.pain_trend || [];
-  const adherence = metrics.adherence_percentage || 0;
 
   return (
     <div style={styles.container}>
       <h2 style={styles.header}>📊 Your Recovery Dashboard</h2>
 
       <div style={styles.kpiRow}>
-        <div style={styles.kpiCard}>
-          <span style={styles.kpiLabel}>Adherence</span>
-          <span style={styles.kpiValue}>{adherence}%</span>
-        </div>
-        <div style={styles.kpiCard}>
-          <span style={styles.kpiLabel}>Check-ins</span>
-          <span style={styles.kpiValue}>{metrics.checkins_completed || 0}</span>
-        </div>
-        <div style={styles.kpiCard}>
-          <span style={styles.kpiLabel}>Milestones</span>
-          <span style={styles.kpiValue}>{metrics.milestones_completed || 0}</span>
-        </div>
-        <div style={styles.kpiCard}>
-          <span style={styles.kpiLabel}>High-risk alerts</span>
-          <span style={styles.kpiValue}>{metrics.high_risk_flags || 0}</span>
-        </div>
+        {[
+          { label: "Adherence", value: `${metrics.adherence_percentage || 0}%` },
+          { label: "Check-ins", value: metrics.checkins_completed || 0 },
+          { label: "Milestones", value: metrics.milestones_completed || 0 },
+          { label: "High-risk alerts", value: metrics.high_risk_flags || 0 },
+        ].map(({ label, value }) => (
+          <div key={label} style={styles.kpiCard}>
+            <span style={styles.kpiLabel}>{label}</span>
+            <span style={styles.kpiValue}>{value}</span>
+          </div>
+        ))}
       </div>
 
       <div style={styles.chartRow}>
@@ -75,45 +72,138 @@ export default function Dashboard({ token }) {
               <XAxis dataKey="date" />
               <YAxis domain={[0, 10]} />
               <Tooltip />
-              <Line type="monotone" dataKey="severity" stroke="#0062FF" strokeWidth={3} dot={{ r: 4 }} />
+              <Line
+                type="monotone"
+                dataKey="severity"
+                stroke="#0062FF"
+                strokeWidth={3}
+                dot={{ r: 4 }}
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>
+
         <div style={styles.chartBox}>
-          <h4 style={styles.chartTitle}>Adherence by Day</h4>
+          <h4 style={styles.chartTitle}>Pain Severity — 7 Day Detail</h4>
           <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={painTrend.slice(-7)}>
+            <LineChart data={painTrend.slice(-7)}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="date" />
-              <YAxis domain={[0, 1]} />
+              <YAxis domain={[0, 10]} />
               <Tooltip />
-              <Bar dataKey="adherence" fill="#00B050" />
-            </BarChart>
+              <Line
+                type="monotone"
+                dataKey="severity"
+                stroke="#FF6B00"
+                strokeWidth={3}
+                dot={{ r: 4 }}
+              />
+            </LineChart>
           </ResponsiveContainer>
         </div>
       </div>
 
       <div style={styles.footer}>
         <p style={styles.footerText}>💚 You're on track! Keep up the great work.</p>
-        <button style={styles.secondaryBtn} onClick={fetchDashboard}>Refresh Data</button>
+        <button
+          style={styles.secondaryBtn}
+          onClick={fetchDashboard}
+          disabled={refreshing}
+        >
+          {refreshing ? "Refreshing..." : "Refresh"}
+        </button>
       </div>
     </div>
   );
 }
 
 const styles = {
-  container: { maxWidth: 960, margin: "0 auto", padding: 24, fontFamily: "'IBM Plex Sans', Arial, sans-serif" },
-  header: { fontSize: 24, fontWeight: 700, color: "#0062FF", marginBottom: 24 },
-  kpiRow: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 24 },
-  kpiCard: { background: "#F4F8FF", borderRadius: 12, padding: 16, textAlign: "center" },
-  kpiLabel: { display: "block", fontSize: 13, color: "#595959" },
-  kpiValue: { display: "block", fontSize: 28, fontWeight: 700, color: "#0062FF" },
-  chartRow: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 24 },
-  chartBox: { background: "#fff", borderRadius: 12, padding: 16, boxShadow: "0 2px 12px rgba(0,0,0,0.06)" },
-  chartTitle: { fontSize: 14, fontWeight: 600, color: "#222", marginBottom: 8 },
-  footer: { display: "flex", justifyContent: "space-between", alignItems: "center", background: "#E6F0FF", borderRadius: 12, padding: "12px 20px" },
-  footerText: { fontSize: 14, color: "#0062FF", fontWeight: 600 },
-  secondaryBtn: { padding: "8px 24px", background: "transparent", border: "2px solid #0062FF", borderRadius: 8, color: "#0062FF", fontWeight: 600, cursor: "pointer" },
-  loader: { textAlign: "center", fontSize: 18, color: "#595959", padding: 40 },
-  error: { textAlign: "center", fontSize: 18, color: "#CC0000", padding: 40 },
+  container: {
+    maxWidth: 960,
+    margin: "0 auto",
+    padding: 24,
+    fontFamily: "'IBM Plex Sans', Arial, sans-serif",
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 700,
+    color: "#0062FF",
+    marginBottom: 24,
+  },
+  kpiRow: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gap: 16,
+    marginBottom: 24,
+  },
+  kpiCard: {
+    background: "#F4F8FF",
+    borderRadius: 12,
+    padding: 16,
+    textAlign: "center",
+  },
+  kpiLabel: {
+    display: "block",
+    fontSize: 13,
+    color: "#595959",
+  },
+  kpiValue: {
+    display: "block",
+    fontSize: 28,
+    fontWeight: 700,
+    color: "#0062FF",
+  },
+  chartRow: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: 24,
+    marginBottom: 24,
+  },
+  chartBox: {
+    background: "#fff",
+    borderRadius: 12,
+    padding: 16,
+    boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+  },
+  chartTitle: {
+    fontSize: 14,
+    fontWeight: 600,
+    color: "#222",
+    marginBottom: 8,
+  },
+  footer: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    background: "#E6F0FF",
+    borderRadius: 12,
+    padding: "12px 20px",
+  },
+  footerText: {
+    fontSize: 14,
+    color: "#0062FF",
+    fontWeight: 600,
+  },
+  secondaryBtn: {
+    padding: "8px 24px",
+    background: "transparent",
+    border: "2px solid #0062FF",
+    borderRadius: 8,
+    color: "#0062FF",
+    fontWeight: 600,
+    cursor: "pointer",
+    transition: "opacity 0.2s",
+  },
+  loader: {
+    textAlign: "center",
+    fontSize: 18,
+    color: "#595959",
+    padding: 40,
+  },
+  error: {
+    textAlign: "center",
+    fontSize: 18,
+    color: "#CC0000",
+    padding: 40,
+  },
 };

@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1782590227152" clover="3.2.0">
-  <project timestamp="1782590227153" name="All files">
-    <metrics statements="153" coveredstatements="65" conditionals="112" coveredconditionals="42" methods="41" coveredmethods="14" elements="306" coveredelements="121" complexity="0" loc="153" ncloc="153" packages="3" files="9" classes="9"/>
+<coverage generated="1782660668626" clover="3.2.0">
+  <project timestamp="1782660668626" name="All files">
+    <metrics statements="161" coveredstatements="77" conditionals="120" coveredconditionals="52" methods="46" coveredmethods="17" elements="327" coveredelements="146" complexity="0" loc="161" ncloc="161" packages="3" files="9" classes="9"/>
     <package name="src">
-      <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="9" coveredstatements="3" conditionals="6" coveredconditionals="3" methods="5" coveredmethods="2"/>
       <file name="App.js" path="D:\Desktop_Sl\IBM\IBM_Lab_Project\healthcare-ai-agent\frontend\src\App.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="4" count="1" type="stmt"/>
+        <metrics statements="7" coveredstatements="3" conditionals="6" coveredconditionals="3" methods="5" coveredmethods="2"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
       </file>
       <file name="index.js" path="D:\Desktop_Sl\IBM\IBM_Lab_Project\healthcare-ai-agent\frontend\src\index.js">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -15,11 +21,11 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="134" coveredstatements="63" conditionals="108" coveredconditionals="42" methods="37" coveredmethods="13"/>
+      <metrics statements="136" coveredstatements="68" conditionals="110" coveredconditionals="45" methods="38" coveredmethods="14"/>
       <file name="Checkin.jsx" path="D:\Desktop_Sl\IBM\IBM_Lab_Project\healthcare-ai-agent\frontend\src\components\Checkin.jsx">
-        <metrics statements="41" coveredstatements="0" conditionals="46" coveredconditionals="0" methods="14" coveredmethods="0"/>
-        <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="11" count="0" type="stmt"/>
+        <metrics statements="41" coveredstatements="3" conditionals="46" coveredconditionals="2" methods="14" coveredmethods="0"/>
+        <line num="9" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="1" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
@@ -58,31 +64,33 @@
         <line num="193" count="0" type="stmt"/>
         <line num="207" count="0" type="stmt"/>
         <line num="216" count="0" type="stmt"/>
-        <line num="241" count="0" type="stmt"/>
+        <line num="241" count="1" type="stmt"/>
       </file>
       <file name="Dashboard.jsx" path="D:\Desktop_Sl\IBM\IBM_Lab_Project\healthcare-ai-agent\frontend\src\components\Dashboard.jsx">
-        <metrics statements="21" coveredstatements="20" conditionals="20" coveredconditionals="13" methods="3" coveredmethods="3"/>
-        <line num="13" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="17" count="3" type="stmt"/>
-        <line num="18" count="3" type="stmt"/>
-        <line num="20" count="3" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="24" count="3" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="29" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="30" count="2" type="stmt"/>
-        <line num="31" count="2" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="39" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="40" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="41" count="1" type="cond" truecount="1" falsecount="1"/>
+        <metrics statements="23" coveredstatements="22" conditionals="22" coveredconditionals="14" methods="4" coveredmethods="4"/>
+        <line num="13" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="5" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="21" count="5" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="26" count="5" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="32" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="42" count="5" type="cond" truecount="2" falsecount="0"/>
         <line num="43" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="44" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="104" count="1" type="stmt"/>
+        <line num="46" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="59" count="4" type="stmt"/>
+        <line num="120" count="2" type="stmt"/>
       </file>
       <file name="Feedback.jsx" path="D:\Desktop_Sl\IBM\IBM_Lab_Project\healthcare-ai-agent\frontend\src\components\Feedback.jsx">
         <metrics statements="5" coveredstatements="5" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>
@@ -94,13 +102,13 @@
       </file>
       <file name="Login.jsx" path="D:\Desktop_Sl\IBM\IBM_Lab_Project\healthcare-ai-agent\frontend\src\components\Login.jsx">
         <metrics statements="23" coveredstatements="9" conditionals="12" coveredconditionals="5" methods="4" coveredmethods="1"/>
-        <line num="10" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="13" count="4" type="stmt"/>
-        <line num="14" count="4" type="stmt"/>
-        <line num="15" count="4" type="stmt"/>
-        <line num="16" count="4" type="stmt"/>
-        <line num="17" count="4" type="stmt"/>
-        <line num="19" count="4" type="stmt"/>
+        <line num="10" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+        <line num="15" count="5" type="stmt"/>
+        <line num="16" count="5" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
@@ -113,10 +121,10 @@
         <line num="34" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
-        <line num="42" count="4" type="stmt"/>
+        <line num="42" count="5" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
         <line num="67" count="0" type="stmt"/>
-        <line num="90" count="1" type="stmt"/>
+        <line num="90" count="2" type="stmt"/>
       </file>
       <file name="Onboarding.jsx" path="D:\Desktop_Sl\IBM\IBM_Lab_Project\healthcare-ai-agent\frontend\src\components\Onboarding.jsx">
         <metrics statements="16" coveredstatements="14" conditionals="14" coveredconditionals="14" methods="7" coveredmethods="5"/>
@@ -135,11 +143,11 @@
         <line num="60" count="5" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
         <line num="66" count="11" type="stmt"/>
-        <line num="86" count="1" type="stmt"/>
+        <line num="86" count="2" type="stmt"/>
       </file>
       <file name="Settings.jsx" path="D:\Desktop_Sl\IBM\IBM_Lab_Project\healthcare-ai-agent\frontend\src\components\Settings.jsx">
         <metrics statements="28" coveredstatements="15" conditionals="10" coveredconditionals="5" methods="8" coveredmethods="3"/>
-        <line num="8" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="11" count="4" type="stmt"/>
         <line num="16" count="4" type="stmt"/>
         <line num="17" count="4" type="stmt"/>
@@ -166,29 +174,29 @@
         <line num="72" count="0" type="stmt"/>
         <line num="84" count="0" type="stmt"/>
         <line num="101" count="0" type="stmt"/>
-        <line num="115" count="1" type="stmt"/>
+        <line num="115" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.context">
-      <metrics statements="16" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <metrics statements="16" coveredstatements="6" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="1"/>
       <file name="AuthContext.js" path="D:\Desktop_Sl\IBM\IBM_Lab_Project\healthcare-ai-agent\frontend\src\context\AuthContext.js">
-        <metrics statements="16" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
+        <metrics statements="16" coveredstatements="6" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="1"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="11" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
       </file>
     </package>
   </project>

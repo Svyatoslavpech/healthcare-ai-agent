@@ -1,8 +1,12 @@
-﻿import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import App from '../App';  // ← исправлено: ../App вместо ./App
+﻿import { render, screen } from '@testing-library/react';
+import App from '../App';
 
-test('renders patient care agent heading', () => {
+test('renders login page by default (no token)', () => {
   render(<App />);
-  expect(screen.getByText('Post-Discharge Patient Care Agent')).toBeTruthy();
+  // Проверяем элементы страницы логина
+  expect(screen.getByText('Post-Discharge Care')).toBeInTheDocument();
+  expect(screen.getByText('Your AI-powered recovery assistant')).toBeInTheDocument();
+  expect(screen.getByPlaceholderText('patient@hospital.com')).toBeInTheDocument();
+  expect(screen.getByPlaceholderText('••••••••')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /Sign In/i })).toBeInTheDocument();
 });

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.25% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/16</span>
+                <span class='fraction'>6/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.25% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/16</span>
+                <span class='fraction'>6/16</span>
             </div>
         
             
@@ -107,15 +107,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -123,7 +123,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -131,7 +131,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -146,13 +146,13 @@ import { createContext, useState, useCallback } from "react";
 &nbsp;
 export const AuthContext = createContext(null);
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >AuthProvider(</span>{ children }) {
-  const [token, setToken]       = <span class="cstat-no" title="statement not covered" >useState(localStorage.getItem("access_token") || null);</span>
-  const [user, setUser]         = <span class="cstat-no" title="statement not covered" >useState(</span>
+export function AuthProvider({ children }) {
+  const [token, setToken]       = useState(localStorage.getItem("access_token") || null);
+  const [user, setUser]         = useState(
     JSON.parse(localStorage.getItem("user") || "null")
   );
 &nbsp;
-  const login = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >(a</span>ccessToken, refreshToken, userData) =&gt; {</span>
+  const login = useCallback(<span class="fstat-no" title="function not covered" >(a</span>ccessToken, refreshToken, userData) =&gt; {
 <span class="cstat-no" title="statement not covered" >    localStorage.setItem("access_token",  accessToken);</span>
 <span class="cstat-no" title="statement not covered" >    localStorage.setItem("refresh_token", refreshToken);</span>
 <span class="cstat-no" title="statement not covered" >    localStorage.setItem("user",          JSON.stringify(userData));</span>
@@ -160,7 +160,7 @@ export function <span class="fstat-no" title="function not covered" >AuthProvide
 <span class="cstat-no" title="statement not covered" >    setUser(userData);</span>
   }, []);
 &nbsp;
-  const logout = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+  const logout = useCallback(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >    localStorage.removeItem("access_token");</span>
 <span class="cstat-no" title="statement not covered" >    localStorage.removeItem("refresh_token");</span>
 <span class="cstat-no" title="statement not covered" >    localStorage.removeItem("user");</span>
@@ -168,7 +168,7 @@ export function <span class="fstat-no" title="function not covered" >AuthProvide
 <span class="cstat-no" title="statement not covered" >    setUser(null);</span>
   }, []);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;AuthContext.Provider value={{ token, user, login, logout }}&gt;
       {children}
     &lt;/AuthContext.Provider&gt;
@@ -181,7 +181,7 @@ export function <span class="fstat-no" title="function not covered" >AuthProvide
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-27T19:57:07.075Z
+                at 2026-06-28T15:31:08.490Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
