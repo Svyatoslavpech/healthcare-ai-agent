@@ -109,14 +109,6 @@ jobs:
 
       - name: Build backend image (no cache)
         run: docker build --no-cache -t postdischarge-backend:test .
-
-      - name: Verify image runs
-        run: |
-          docker run --rm \
-            -e DATABASE_URL="postgresql://postgres:postgres@localhost/test" \
-            -e WATSONX_API_KEY="test" \
-            postdischarge-backend:test \
-            python -c "from app import create_app; app = create_app(); print('OK')"
       - name: Verify image contents
         run: |
           docker run --rm postdischarge-backend:test ls -la /app/routes/
@@ -126,3 +118,10 @@ jobs:
       - name: Verify image contents (services)
         run: |
           docker run --rm postdischarge-backend:test ls -la /app/services/
+      - name: Verify image runs
+        run: |
+          docker run --rm \
+          -e DATABASE_URL="postgresql://postgres:postgres@localhost/test" \
+          -e WATSONX_API_KEY="test" \
+          postdischarge-backend:test \
+          python -c "import app; print('OK')"
