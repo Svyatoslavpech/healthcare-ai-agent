@@ -250,7 +250,7 @@ PYTHONPATH=src/backend pytest tests/integration -v
 ## 🔗 Related Projects
 
 - **GRADE Framework** — [retail-ai-store-level-intelligence](https://github.com/Svyatoslavpech/retail-ai-store-level-intelligence): 10 failure patterns for AI agents in production
-- **Weather App QA Demo** — 6 Mocha/Chai tests + PromptFoo evaluation suite
+- **Weather App QA Demo** — 6 Mocha/Chai tests
 
 ---
 
