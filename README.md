@@ -1,6 +1,5 @@
 # 🏥 Post-Discharge Patient Care Agent
 
-```markdown
 ## 📰 GRADE Framework Series — Featured Articles
 
 This repository is the production implementation behind:
@@ -15,7 +14,7 @@ Dual-agent validation, adversarial test design, evaluation methodology.
 
 **GRADE Framework:** 10 failure patterns, full benchmark suite
 → [github.com/Svyatoslavpech/retail-ai-store-level-intelligence](https://github.com/Svyatoslavpech/retail-ai-store-level-intelligence)
-```
+
 
 > **AI-powered virtual nurse for patients after hospital discharge.**  
 > Built on IBM watsonx Orchestrate + watsonx.ai by team **Spiritual Techies**  
