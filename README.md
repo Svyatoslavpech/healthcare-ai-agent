@@ -1,5 +1,22 @@
 # 🏥 Post-Discharge Patient Care Agent
 
+```markdown
+## 📰 GRADE Framework Series — Featured Articles
+
+This repository is the production implementation behind:
+
+**Part 1:** "87% on USMLE. 52% Under-Triage Rate in Production. Same AI."
+→ [Read on LinkedIn](ССЫЛКА_MAIN)
+What standard benchmarks miss — and why the gap matters.
+
+**Part 2:** "How to Build the Tests That Actually Catch Healthcare AI Deployment Failures"
+→ [Read on LinkedIn](ССЫЛКА_DEEP)
+Dual-agent validation, adversarial test design, evaluation methodology.
+
+**GRADE Framework:** 10 failure patterns, full benchmark suite
+→ [github.com/Svyatoslavpech/retail-ai-store-level-intelligence](https://github.com/Svyatoslavpech/retail-ai-store-level-intelligence)
+```
+
 > **AI-powered virtual nurse for patients after hospital discharge.**  
 > Built on IBM watsonx Orchestrate + watsonx.ai by team **Spiritual Techies**  
 > IBM AI Experiential Learning Lab 2025 — Healthcare Track, Challenge 1
