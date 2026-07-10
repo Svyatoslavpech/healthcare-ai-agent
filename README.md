@@ -5,7 +5,7 @@
 This repository is the production implementation behind:
 
 **Part 1:** "87% on USMLE. 52% Under-Triage Rate in Production. Same AI."
-→ [Read on LinkedIn](ССЫЛКА_MAIN)
+→ [Read on LinkedIn](https://www.linkedin.com/pulse/87-usmle-52-under-triage-rate-production-same-ai-pechenevskyi-nlx7c/)
 What standard benchmarks miss — and why the gap matters.
 
 **Part 2:** "How to Build the Tests That Actually Catch Healthcare AI Deployment Failures"
