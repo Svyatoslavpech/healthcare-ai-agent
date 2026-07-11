@@ -9,7 +9,7 @@ This repository is the production implementation behind:
 What standard benchmarks miss — and why the gap matters.
 
 **Part 2:** "How to Build the Tests That Actually Catch Healthcare AI Deployment Failures"
-→ [Read on LinkedIn](ССЫЛКА_DEEP)
+→ [Read on LinkedIn](https://www.linkedin.com/pulse/how-build-tests-actually-catch-healthcare-ai-failures-pechenevskyi-5idnc/)
 Dual-agent validation, adversarial test design, evaluation methodology.
 
 **GRADE Framework:** 10 failure patterns, full benchmark suite
