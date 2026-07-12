@@ -38,3 +38,4 @@ mlartifacts/
 *.pem
 *.key
 api_keys.txt
+frontend/coverage/
