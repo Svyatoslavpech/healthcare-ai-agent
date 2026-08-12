@@ -54,8 +54,8 @@ This project began as a prototype developed during the **IBM AI Experiential Lea
 
 - Conducted user research and validated the concept with patients and nurses
 - Designed the agent architecture and conversation flow
-- Built a functional prototype using IBM WatsonX Orchestrate
-- 66 automated tests (43 backend: 36 unit escalation + 7 WatsonX integration + 23 frontend)
+- Built a functional prototype using IBM watsonx Orchestrate
+- 66 automated tests (43 backend: 36 unit escalation + 7 watsonx integration + 23 frontend)
 - Received confirmation from IBM mentors that the approach was clinically sound
 
 **After the Lab**, we took the initiative to scale the prototype into a production-ready system:
@@ -81,7 +81,7 @@ This project began as a prototype developed during the **IBM AI Experiential Lea
 ```
 Patient App (React/Flutter)
         ↓
-IBM Watsonx Orchestrate (PostDischargePatient_CareAgent)
+IBM watsonx Orchestrate (PostDischargePatient_CareAgent)
         ↓                    ↓
 watsonx.ai               Tools (OpenAPI)
 (Risk Evaluation)    ┌────────────────────┐
@@ -135,7 +135,7 @@ PostgreSQL / IBM Cloud DB2
 
 ## 🧠 Knowledge Base (18 Documents)
 
-The agent references verified clinical documents uploaded to WatsonX Orchestrate:
+The agent references verified clinical documents uploaded to watsonx Orchestrate:
 
 - `PostDischarge_Guidelines.pdf` — discharge protocols, symptom escalation criteria
 - `HF-Symptom-Tracker.pdf` — heart failure symptom monitoring
