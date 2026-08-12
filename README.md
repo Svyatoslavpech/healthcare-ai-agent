@@ -25,7 +25,7 @@ Dual-agent validation, adversarial test design, evaluation methodology.
 [![Model](https://img.shields.io/badge/Model-Granite--3.3--8B--Instruct-green)](https://www.ibm.com/granite)
 [![HIPAA](https://img.shields.io/badge/Compliance-HIPAA--Ready-red)](docs/architecture.md)
 [![Status](https://img.shields.io/badge/Status-Backend%20Ready%20%7C%20Frontend%20In%20Progress-yellow)](https://github.com/Svyatoslavpech/healthcare-ai-agent)
-[![Portfolio](https://img.shields.io/badge/Portfolio-svyatsolutions.com-1F3864)](https://svyatsolutions.com)
+<!--   [![Portfolio](https://img.shields.io/badge/Portfolio-svyatsolutions.com-1F3864?style=flat&logo=google-chrome)](https://svyatsolutions.com)   -->
 
 ---
 
