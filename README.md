@@ -150,12 +150,12 @@ The agent references verified clinical documents uploaded to WatsonX Orchestrate
 
 ## 📊 KPIs & Metrics
 
-| KPI                                    | Target      | Status       |
-|----------------------------------------|-------------|--------------|
-| Critical symptom detection accuracy    | ≥ 90%       | ✅ Validated |
-| Average agent response time            | ≤ 3 seconds | ✅ Validated |
-| Conversation completion rate           | ≥ 85%       | ✅ Validated |
-| Ethical compliance (IBM mentor review) | Confirmed   | ✅ Confirmed |
+| KPI                                                                                 | Target      | Status       |
+|-------------------------------------------------------------------------------------|-------------|--------------|
+| All 36 escalation unit tests pass, including adversarial cardiac-presentation cases |             |✅ Validated |
+| Average agent response time                                                         | ≤ 3 seconds | ✅ Validated |
+| Conversation completion rate                                                        | ≥ 85%       | ✅ Validated |
+| Ethical compliance (IBM mentor review)                                              | Confirmed   | ✅ Confirmed |
 
 ---
 
@@ -226,13 +226,13 @@ npm start
 ### Multi-Step (from live demo)
 
 ```
-Patient: "I had viral fever and now I'm recovering from it"
+Patient: "I had viral fever, and now I'm recovering from it"
 Agent:   "What symptoms are you still experiencing?"
-Patient: "temperature"
+Patient: "Temperature"
 Agent:   "How high is your current temperature?"
-Patient: "102 degree"
+Patient: "102 degrees"
 Agent:   "Have you taken any medication to reduce the fever?"
-Patient: "no"
+Patient: "No"
 Agent:   "What is your age?"
 Patient: "65"
 → Risk evaluation → Escalation triggered → Recovery guidance provided
