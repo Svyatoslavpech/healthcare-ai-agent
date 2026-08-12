@@ -63,7 +63,7 @@ This project began as a prototype developed during the **IBM AI Experiential Lea
 - ✅ Built a full Flask backend with 4-layer safety architecture
 - ✅ Implemented JWT authentication, database models, and REST API
 - ✅ Added MLflow audit logging for HIPAA compliance
-- ✅ Wrote comprehensive tests (55+ unit + adversarial + integration scenarios)
+- ✅ Wrote comprehensive tests (66 unit + adversarial + integration scenarios)
 - ✅ Set up Docker, docker-compose, and GitHub Actions CI/CD
 - ✅ Integrated with IBM watsonx.ai Granite-3.3-8B for risk evaluation
 
@@ -111,7 +111,7 @@ PostgreSQL / IBM Cloud DB2
 | **Layer 3** | Output Guardrails | Block unverified medical references, enforce HIPAA boundaries                         |
 | **Layer 4** | Audit Logging     | MLflow records every decision for compliance review                                   |
 
-**Result: Zero critical findings across 55+ test scenarios including adversarial prompts.**
+**Result: Zero critical findings across 66 test scenarios including adversarial prompts.**
 
 ---
 
