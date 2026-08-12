@@ -12,7 +12,7 @@ What standard benchmarks miss — and why the gap matters.
 → [Read on LinkedIn](https://www.linkedin.com/pulse/how-build-tests-actually-catch-healthcare-ai-failures-pechenevskyi-5idnc/)
 Dual-agent validation, adversarial test design, evaluation methodology.
 
-**GRADE Framework:** 10 failure patterns, full benchmark suite
+**GRADE Framework:** 11 failure patterns, full benchmark suite
 → [github.com/Svyatoslavpech/retail-ai-store-level-intelligence](https://github.com/Svyatoslavpech/retail-ai-store-level-intelligence)
 
 
@@ -265,7 +265,7 @@ PYTHONPATH=src/backend pytest tests/integration -v
 
 ## 🔗 Related Projects
 
-- **GRADE Framework** — [retail-ai-store-level-intelligence](https://github.com/Svyatoslavpech/retail-ai-store-level-intelligence): 10 failure patterns for AI agents in production
+- **GRADE Framework** — [retail-ai-store-level-intelligence](https://github.com/Svyatoslavpech/retail-ai-store-level-intelligence): 11 failure patterns for AI agents in production
 - **Weather App QA Demo** — 6 Mocha/Chai tests
 
 ---
