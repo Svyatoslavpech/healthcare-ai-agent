@@ -258,8 +258,8 @@ PYTHONPATH=src/backend pytest tests/integration -v
 | Documentation Lead           | Sviatoslav Pechenevskyi     |
 
 **Contact:** svyatoslavpech@gmail.com  
-**LinkedIn:** [linkedin.com/in/svyatsolution](https://linkedin.com/in/svyatsolution)  
-**Portfolio:** [svyatsolutions.com](https://svyatsolutions.com)
+**LinkedIn:** [(https://www.linkedin.com/in/slav-pechenevskyi/)](https://linkedin.com/in/slav-pechenevskyi)  
+<!--   [![Portfolio](https://img.shields.io/badge/Portfolio-svyatsolutions.com-1F3864?style=flat&logo=google-chrome)](https://svyatsolutions.com)   -->
 
 ---
 
