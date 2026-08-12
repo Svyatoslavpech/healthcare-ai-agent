@@ -60,7 +60,7 @@ This project began as a prototype developed during the **IBM AI Experiential Lea
 
 **After the Lab**, we took the initiative to scale the prototype into a production-ready system:
 
-- ✅ Built a full Flask backend with 4-layer safety architecture
+- ✅ Built a full Flask backend with a 4-layer safety architecture
 - ✅ Implemented JWT authentication, database models, and REST API
 - ✅ Added MLflow audit logging for HIPAA compliance
 - ✅ Wrote comprehensive tests (66 unit + adversarial + integration scenarios)
@@ -258,7 +258,7 @@ PYTHONPATH=src/backend pytest tests/integration -v
 | Documentation Lead           | Sviatoslav Pechenevskyi     |
 
 **Contact:** svyatoslavpech@gmail.com  
-**LinkedIn:** [(https://www.linkedin.com/in/slav-pechenevskyi/)](https://linkedin.com/in/slav-pechenevskyi)  
+**LinkedIn: [linkedin.com/in/slav-pechenevskyi](https://www.linkedin.com/in/slav-pechenevskyi/)  
 <!--   [![Portfolio](https://img.shields.io/badge/Portfolio-svyatsolutions.com-1F3864?style=flat&logo=google-chrome)](https://svyatsolutions.com)   -->
 
 ---
