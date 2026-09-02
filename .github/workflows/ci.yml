@@ -40,7 +40,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install pytest pytest-cov
+          pip install pytest pytest-cov responses
 
       - name: Run unit tests
         env:
@@ -48,13 +48,12 @@ jobs:
           FLASK_ENV:      testing
           WATSONX_API_KEY: ""   # Mock — no real API calls in unit tests
         run: |
-          cd src/backend
-          pytest tests/unit -v --cov=. --cov-report=xml --cov-report=term
+          pytest tests/ -v --cov=src/backend --cov-report=xml --cov-report=term
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
         with:
-          file: src/backend/coverage.xml
+          file: coverage.xml
 
   # ── Frontend Tests ───────────────────────────────────────────────────────
   frontend-test:
