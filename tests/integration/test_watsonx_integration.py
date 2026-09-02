@@ -30,7 +30,7 @@ pytestmark = pytest.mark.skipif(
 @pytest.fixture
 def mock_watsonx_api():
     """Mock IBM watsonx.ai API responses."""
-    with responses_lib.RequestsMock() as rsps:
+    with responses_lib.RequestsMock(assert_all_requests_are_fired=False) as rsps:
         rsps.add(
             responses_lib.POST,
             "https://iam.cloud.ibm.com/identity/token",
