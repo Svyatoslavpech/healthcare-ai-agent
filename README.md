@@ -15,6 +15,12 @@ Dual-agent validation, adversarial test design, evaluation methodology.
 **GRADE Framework:** 11 failure patterns, full benchmark suite
 → [github.com/Svyatoslavpech/retail-ai-store-level-intelligence](https://github.com/Svyatoslavpech/retail-ai-store-level-intelligence)
 
+**"I Ran One Prompt Through 12 AI Models. Here's What Broke, and What Didn't."**
+→ [Read on LinkedIn](https://www.linkedin.com/pulse/i-ran-one-prompt-through-12-ai-models-heres-what-pechenevskyi-ol6kc)
+
+
+A field test in multi-model LLM evaluation — failure mode taxonomy,
+convergence as a signal, and what a single-model check would miss.
 
 > **AI-powered virtual nurse for patients after hospital discharge.**  
 > Built on IBM watsonx Orchestrate + watsonx.ai by team **Spiritual Techies**  
