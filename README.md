@@ -257,11 +257,10 @@ PYTHONPATH=src/backend pytest tests/integration -v
 
 | Role                         | Name                        |
 |------------------------------|-----------------------------|
-| Project Lead / Scrum Master  | **Sviatoslav Pechenevskyi** |
+| Team Lead & AI Product Owner | **Sviatoslav Pechenevskyi** |
 | AI / Backend Developer       | Sylvester Edmond Saidu      |
 | Frontend / Chatbot Developer | Huu Hung Nguyen             |
 | Data & QA Engineer           | Dipayan Samanta             |
-| Documentation Lead           | Sviatoslav Pechenevskyi     |
 
 **Contact:** svyatoslavpech@gmail.com  
 LinkedIn: [linkedin.com/in/slav-pechenevskyi](https://www.linkedin.com/in/slav-pechenevskyi/)
