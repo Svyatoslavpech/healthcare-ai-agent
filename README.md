@@ -2,7 +2,7 @@
 
 ## 📰 GRADE Framework Series — Featured Articles
 
-This repository is the production implementation behind:
+This repository is the reference implementation behind:
 
 **Part 1:** "87% on USMLE. 52% Under-Triage Rate in Production. Same AI."
 → [Read on LinkedIn](https://www.linkedin.com/pulse/87-usmle-52-under-triage-rate-production-same-ai-pechenevskyi-nlx7c/)
@@ -10,7 +10,7 @@ What standard benchmarks miss — and why the gap matters.
 
 **Part 2:** "How to Build the Tests That Actually Catch Healthcare AI Deployment Failures"
 → [Read on LinkedIn](https://www.linkedin.com/pulse/how-build-tests-actually-catch-healthcare-ai-failures-pechenevskyi-5idnc/)
-Dual-agent validation, adversarial test design, evaluation methodology.
+Adversarial test design and evaluation methodology.
 
 **GRADE Framework:** 11 failure patterns, full benchmark suite
 → [github.com/Svyatoslavpech/retail-ai-store-level-intelligence](https://github.com/Svyatoslavpech/retail-ai-store-level-intelligence)
@@ -28,8 +28,8 @@ convergence as a signal, and what a single-model check would miss.
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![IBM watsonx](https://img.shields.io/badge/IBM-watsonx-0062FF)](https://www.ibm.com/watsonx)
-[![Model](https://img.shields.io/badge/Model-Granite--3.3--8B--Instruct-green)](https://www.ibm.com/granite)
-[![HIPAA](https://img.shields.io/badge/Compliance-HIPAA--Ready-red)](docs/architecture.md)
+[![Models](https://img.shields.io/badge/Models-Llama_3.2_90B_%7C_Granite_3.3_8B-green)](https://www.ibm.com/watsonx)
+[![HIPAA](https://img.shields.io/badge/Simulated_HIPAA_Audit-0_critical_findings-red)](docs/architecture.md)
 [![Status](https://img.shields.io/badge/Status-Backend%20Ready%20%7C%20Frontend%20In%20Progress-yellow)](https://github.com/Svyatoslavpech/healthcare-ai-agent)
 <!--   [![Portfolio](https://img.shields.io/badge/Portfolio-svyatsolutions.com-1F3864?style=flat&logo=google-chrome)](https://svyatsolutions.com)   -->
 
@@ -50,7 +50,7 @@ An autonomous **Post-Discharge Patient Care Agent** that acts as a virtual follo
 - 🚨 **Escalation workflows** — high-risk symptoms trigger immediate nurse notification
 - 📊 **Recovery dashboard** — visual tracking of adherence and recovery trends
 - 🧠 **Multi-turn memory** — context-aware interactions across sessions
-- 💙 **Empathetic messaging** — warm, clinical, HIPAA-compliant responses
+- 💙 **Empathetic messaging** — warm, clinical responses designed around HIPAA privacy boundaries
 
 ---
 
@@ -58,18 +58,18 @@ An autonomous **Post-Discharge Patient Care Agent** that acts as a virtual follo
 
 This project began as a prototype developed during the **IBM AI Experiential Learning Lab** (Healthcare Track, Challenge 1). During the Lab, our team:
 
-- Conducted user research and validated the concept with patients and nurses
+- Gathered informal input from patients and nurses in Boise (an independent initiative) to shape the concept
 - Designed the agent architecture and conversation flow
 - Built a functional prototype using IBM watsonx Orchestrate
 - 66 automated tests (43 backend: 36 unit escalation + 7 watsonx integration + 23 frontend)
-- Received confirmation from IBM mentors that the approach was clinically sound
+- Reviewed the approach with the IBM program mentor and coach throughout the Lab and received their go-ahead to proceed
 
-**After the Lab**, we took the initiative to scale the prototype into a production-ready system:
+**After the Lab**, we took the initiative to scale the prototype into a fuller working system:
 
 - ✅ Built a full Flask backend with a 4-layer safety architecture
 - ✅ Implemented JWT authentication, database models, and REST API
-- ✅ Added MLflow audit logging for HIPAA compliance
-- ✅ Wrote comprehensive tests (66 unit + adversarial + integration scenarios)
+- ✅ Added MLflow audit logging for compliance traceability
+- ✅ Wrote 66 automated tests — unit, integration, adversarial, and frontend
 - ✅ Set up Docker, docker-compose, and GitHub Actions CI/CD
 - ✅ Integrated with IBM watsonx.ai Granite-3.3-8B for risk evaluation
 
@@ -102,9 +102,8 @@ Nurse Dashboard      │ post__appointments │
 PostgreSQL / IBM Cloud DB2
 ```
 
-**Live Agent:** IBM watsonx Orchestrate (au-syd region)  
-**Status:** 🟢 LIVE  
-**Model:** `llama-3-2-90b-vision-instruct` → migrating to `Granite-3.3-8B-Instruct`
+**Agent:** built and demonstrated on IBM watsonx Orchestrate (au-syd region) during the Lab; the Lab cloud environment has since been closed  
+**Models:** Orchestrate agent — `llama-3-2-90b-vision-instruct` (Granite-3.3-8B-Instruct was also tested; Llama was kept with the coach as more stable at the time). Post-Lab backend risk evaluation — `granite-3-3-8b-instruct` (configurable)
 
 ---
 
@@ -117,7 +116,7 @@ PostgreSQL / IBM Cloud DB2
 | **Layer 3** | Output Guardrails | Block unverified medical references, enforce HIPAA boundaries                         |
 | **Layer 4** | Audit Logging     | MLflow records every decision for compliance review                                   |
 
-**Result: Zero critical findings across 66 test scenarios including adversarial prompts.**
+**Result: zero critical findings in a simulated HIPAA audit; all 36 escalation unit tests pass, including adversarial cardiac-presentation cases.**
 
 ---
 
@@ -136,12 +135,14 @@ PostgreSQL / IBM Cloud DB2
 | Get member profile           | `get__member_profile`        | Patient plan and contact data                 |
 | Edit appointment             | `patch__appointments`        | Reschedule existing appointments              |
 | Cancel appointment           | `delete__appointments`       | Cancel appointments                           |
+| Get appointments             | `get__appointments`          | List upcoming appointments                    |
+| Patient dashboard            | `get__dashboard_patient`     | Recovery and adherence summary                |
 
 ---
 
-## 🧠 Knowledge Base (18 Documents)
+## 🧠 Knowledge Base (7 Documents)
 
-The agent references verified clinical documents uploaded to watsonx Orchestrate:
+The agent references curated reference documents (clinical guidance plus benefits/insurance policy) uploaded to watsonx Orchestrate:
 
 - `PostDischarge_Guidelines.pdf` — discharge protocols, symptom escalation criteria
 - `HF-Symptom-Tracker.pdf` — heart failure symptom monitoring
@@ -150,7 +151,6 @@ The agent references verified clinical documents uploaded to watsonx Orchestrate
 - `PI_PreOp_How-to-recognise-complications.pdf` — complication recognition
 - `HR_Policy_Medicalbenefits.pdf` — insurance and benefits queries
 - `11376-Your-Discharge-Planning-Checklist.pdf` — discharge planning
-- + 11 additional clinical reference documents
 
 ---
 
@@ -159,9 +159,9 @@ The agent references verified clinical documents uploaded to watsonx Orchestrate
 | KPI                                                                                 | Target      | Status       |
 |-------------------------------------------------------------------------------------|-------------|--------------|
 | All 36 escalation unit tests pass, including adversarial cardiac-presentation cases |             |✅ Validated |
-| Average agent response time                                                         | ≤ 3 seconds | ✅ Validated |
-| Conversation completion rate                                                        | ≥ 85%       | ✅ Validated |
-| Ethical compliance (IBM mentor review)                                              | Confirmed   | ✅ Confirmed |
+| Average agent response time                                                         | ≤ 3 seconds | 🎯 Target    |
+| Conversation completion rate                                                        | ≥ 85%       | 🎯 Target    |
+| Safety and ethics approach (discussed with IBM program mentor and coach)            |             | 💬 Reviewed  |
 
 ---
 
@@ -169,15 +169,15 @@ The agent references verified clinical documents uploaded to watsonx Orchestrate
 
 | Layer              | Technology                             | Status              |
 |--------------------|----------------------------------------|---------------------|
-| **AI Core**        | IBM watsonx Orchestrate + watsonx.ai   | ✅ LIVE             |
-| **LLM**            | IBM Granite-3.3-8B-Instruct            | ✅ Integrated       |
-| **Backend**        | Python (Flask)                         | ✅ Production-ready |
+| **AI Core**        | IBM watsonx Orchestrate + watsonx.ai   | ✅ Built (Lab environment closed) |
+| **LLM**            | Llama-3.2-90B-Vision (agent) · Granite-3.3-8B (backend) | ✅ Integrated |
+| **Backend**        | Python (Flask)                         | ✅ Working, tested in CI |
 | **Frontend**       | React.js (Web)                         | 🚧 In development   |
 | **Mobile**         | Flutter                                | 🚧 Planned          |
 | **Database**       | PostgreSQL / IBM Cloud DB2             | ✅ Ready            |
 | **Analytics**      | MLflow + Tableau / Power BI            | ✅ Ready            |
 | **Infrastructure** | Docker, Docker Compose, GitHub Actions | ✅ Ready            |
-| **Compliance**     | HIPAA-ready, Apache 2.0 License        | ✅ Ready            |
+| **Compliance**     | HIPAA-aware design (simulated audit, not certified) · Apache 2.0 License | ✅ Documented |
 
 ---
 
