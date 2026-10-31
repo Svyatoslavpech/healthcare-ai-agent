@@ -99,7 +99,7 @@ Nurse Dashboard      │ post__appointments │
     MLflow           └────────────────────┘
 (KPI Logging)
         ↓
-PostgreSQL / IBM Cloud DB2
+PostgreSQL
 ```
 
 **Agent:** built and demonstrated on IBM watsonx Orchestrate (au-syd region) during the Lab; the Lab cloud environment has since been closed  
@@ -174,8 +174,8 @@ The agent references curated reference documents (clinical guidance plus benefit
 | **Backend**        | Python (Flask)                         | ✅ Working, tested in CI |
 | **Frontend**       | React.js (Web)                         | 🚧 In development   |
 | **Mobile**         | Flutter                                | 🚧 Planned          |
-| **Database**       | PostgreSQL / IBM Cloud DB2             | ✅ Ready            |
-| **Analytics**      | MLflow + Tableau / Power BI            | ✅ Ready            |
+| **Database**       | PostgreSQL                             | ✅ Working (CI test database) |
+| **Analytics**      | MLflow (decision and audit logging)    | ✅ Integrated       |
 | **Infrastructure** | Docker, Docker Compose, GitHub Actions | ✅ Ready            |
 | **Compliance**     | HIPAA-aware design (simulated audit, not certified) · Apache 2.0 License | ✅ Documented |
 
